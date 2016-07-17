@@ -12,6 +12,7 @@
     <meta content="utf-8" http-equiv="encoding">
     
     <script type="text/javascript" src="assets/script/canvasjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
   <script type="text/javascript">
   window.onload = function () {
     
@@ -27,7 +28,7 @@
         labelFontColor: "#369EAD" ,
         lineColor: "#369EAD" ,
         lineThickness: 3,
-        minimum: 0
+        minimum: 0 
         
       }, 
       toolTip: {
@@ -46,24 +47,34 @@
       {
        type: "stepLine",  
        lineThickness: 3,
-       dataPoints: [
-
-       { x: 1, y: 15 },
-       { x: 2, y: 14 },
-       { x: 3, y: 14 },
-       { x: 4, y: 25 },
-       { x: 5, y: 62 },
-       { x: 6, y: null },
-       { x: 7, y: 85 },
-       { x: 8, y: 100 }     
-
-
-       ]
+          dataPoints: []
      }
      ]
    });
 chart.render();
+      
+      $("#addDataPoint").click(function () {
+        var depth = parseInt($("#depth").val());
+        var blowCount = parseInt($("#blowCount").val());
+        console.log("addDataPoint called with: depth=" + depth + " blowCount=" + blowCount);
+        addDatapoint(blowCount, depth);
+
+	});
+      
+      function addDatapoint(blowcount, depth) {
+           var length = chart.options.data[0].dataPoints.length;
+           if (length == 0) {
+               chart.options.data[0].dataPoints.push({ x: depth -1, y: blowcount });
+               chart.options.data[0].dataPoints.push({ x: depth, y: blowcount });
+           } else {
+             chart.options.data[0].dataPoints.push({ x: depth, y: blowcount });  
+           }
+	       
+	       chart.render();
+      }
 }
+  
+	
 </script>
 
 </head>
@@ -71,6 +82,12 @@ chart.render();
 <body>
 
     <div id="chartContainer" style="height: 300px; width: 100%;"> </div>
+    
+    depth: <input id="depth" type="text" value="1" disabled>
+    blow counts: <input id="blowCount" type="text" value="null">
+    
+    <button id="addDataPoint">Add Data Point</button> 
+
 
 </body>
 
