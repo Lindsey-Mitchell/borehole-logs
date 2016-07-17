@@ -1,6 +1,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>  
+    <style>
+        @page {
+            size: 11in 8.5in;
+        }
+
+    </style>
 
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
@@ -16,6 +22,7 @@
       },
       animationEnabled: true,
       axisX:{
+        title:"Depth (ft)",
         includeZero: true,
         labelFontColor: "#369EAD" ,
         lineColor: "#369EAD" ,
@@ -27,6 +34,7 @@
         shared: true
       },
       axisY: {
+        title:"Blows per Foot",
         includeZero: true,
         lineThickness: 2,
         minimum: 0,
@@ -61,9 +69,9 @@ chart.render();
 </head>
 
 <body>
-    <p>Header...</p>
+
     <div id="chartContainer" style="height: 300px; width: 100%;"> </div>
-    <p>...Footer</p>
+
 </body>
 
 </html>
